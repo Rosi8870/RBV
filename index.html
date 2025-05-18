@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ROYALE BROTHERS VLOG</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #f9f9f9 60%, #ffeaea 100%);
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: #fff; /* Set default text color to white */
+    }
+    header {
+      background: linear-gradient(90deg, #ff0000 60%, #ff6a00 100%);
+      color: #fff;
+      padding: 32px 0 24px 0;
+      text-align: center;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.13);
+      letter-spacing: 2px;
+      animation: fadeInDown 1s;
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    #channel-info {
+      max-width: 900px;
+      margin: 0 auto 30px auto;
+      background: rgba(255,255,255,0.08);
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(255,0,0,0.07), 0 1.5px 8px rgba(0,0,0,0.07);
+      padding: 32px 28px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      animation: fadeIn 1.2s;
+      color: #fff;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0;}
+      to { opacity: 1;}
+    }
+    #channel-info img {
+      border-radius: 50%;
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border: 3px solid #ff0000;
+      box-shadow: 0 2px 12px rgba(255,0,0,0.10);
+      transition: transform 0.3s;
+    }
+    #channel-info img:hover {
+      transform: scale(1.08) rotate(-3deg);
+      box-shadow: 0 4px 24px rgba(255,0,0,0.18);
+    }
+    #channel-info .details {
+      flex: 1;
+      color: #fff;
+    }
+    #channel-info .details h2 {
+      margin: 0 0 10px 0;
+      font-size: 2em;
+      color: #f10707;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 0 #ff0000, 0 2px 6px #ffb3b3;
+    }
+    #channel-info .details p {
+      margin: 0 0 8px 0;
+      color: #f10707;
+      font-size: 1.08em;
+      line-height: 1.5;
+    }
+    #channel-info .details a {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 18px;
+      background: linear-gradient(90deg, #ff0000 60%, #ff6a00 100%);
+      color: #fff;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(255,0,0,0.09);
+      transition: background 0.3s, transform 0.2s;
+    }
+    #channel-info .details a:hover {
+      background: linear-gradient(90deg, #ff6a00 60%, #ff0000 100%);
+      transform: scale(1.05);
+    }
+    #videos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      max-width: 1400px;
+      margin: 0 auto 40px auto;
+      min-height: 200px;
+      animation: fadeIn 1.2s;
+      color: #fff;
+    }
+    .video-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 12px;
+      box-shadow: 0 2px 16px rgba(255,0,0,0.07), 0 1.5px 8px rgba(0,0,0,0.07);
+      padding: 16px 12px 18px 12px;
+      width: 340px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      opacity: 0;
+      animation: cardPop 0.7s forwards;
+      color: #fff;
+    }
+    .video-card:nth-child(odd) { animation-delay: 0.1s; }
+    .video-card:nth-child(even) { animation-delay: 0.2s; }
+    @keyframes cardPop {
+      from { opacity: 0; transform: scale(0.96) translateY(30px);}
+      to { opacity: 1; transform: scale(1) translateY(0);}
+    }
+    .video-card:hover {
+      transform: translateY(-8px) scale(1.04) rotate(-1deg);
+      box-shadow: 0 8px 32px rgba(255,0,0,0.18), 0 2px 12px rgba(0,0,0,0.13);
+      z-index: 2;
+    }
+    .video-card h3 {
+      font-size: 1.13em;
+      margin: 12px 0 8px 0;
+      text-align: center;
+      color: #ef0e0e;
+      font-weight: 600;
+      min-height: 48px;
+      letter-spacing: 0.5px;
+    }
+    .video-card p {
+      font-size: 1em;
+      color: #d80a0a;
+      margin: 0 0 10px 0;
+      text-align: center;
+      min-height: 44px;
+    }
+    .video-card iframe {
+      border-radius: 8px;
+      margin-bottom: 10px;
+      box-shadow: 0 2px 8px rgba(255,0,0,0.08);
+      transition: box-shadow 0.2s;
+    }
+    .video-card a {
+      color: #fff;
+      background: linear-gradient(90deg, #ff0000 60%, #ff6a00 100%);
+      padding: 7px 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: 500;
+      margin-top: 6px;
+      transition: background 0.3s, transform 0.2s;
+      box-shadow: 0 2px 8px rgba(255,0,0,0.09);
+      display: inline-block;
+    }
+    .video-card a:hover {
+      background: linear-gradient(90deg, #ff6a00 60%, #ff0000 100%);
+      transform: scale(1.05);
+    }
+    #loadMoreBtn {
+      padding: 12px 32px;
+      font-size: 1.1em;
+      background: linear-gradient(90deg, #ff0000 60%, #ff6a00 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(255,0,0,0.09);
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-top: 10px;
+      transition: background 0.3s, transform 0.2s;
+      outline: none;
+    }
+    #loadMoreBtn:hover {
+      background: linear-gradient(90deg, #ff6a00 60%, #ff0000 100%);
+      transform: scale(1.05);
+    }
+    #subscribeModal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.45);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+    #subscribeModal .modal-content {
+      background: #222;
+      border-radius: 14px;
+      padding: 32px 24px;
+      max-width: 350px;
+      box-shadow: 0 8px 32px rgba(255,0,0,0.18);
+      text-align: center;
+      animation: fadeIn 0.5s;
+      color: #fff;
+    }
+    #subscribeModal h2 {
+      color: #ff0000;
+      margin-bottom: 12px;
+    }
+    #subscribeModal p {
+      color: #fff;
+      margin-bottom: 18px;
+    }
+    #continueBtn {
+      padding: 10px 28px;
+      background: linear-gradient(90deg,#ff0000 60%,#ff6a00 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1em;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+    #closeModalBtn {
+      padding: 6px 18px;
+      background: #eee;
+      color: #333;
+      border: none;
+      border-radius: 6px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+    footer {
+      text-align: center;
+      color: #fff;
+      padding: 24px 0 18px 0;
+      background: linear-gradient(90deg, #ff0000 60%, #ff6a00 100%);
+      margin-top: 40px;
+      font-size: 1.05em;
+      letter-spacing: 1px;
+      box-shadow: 0 -2px 12px rgba(255,0,0,0.08);
+      border-radius: 18px 18px 0 0;
+      animation: fadeInUp 1.2s;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(40px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+    /* Responsive */
+   /* Add this at the end of your <style> block for improved responsiveness */
+// ...existing code...
+
+@media (max-width: 1100px) {
+  #videos { gap: 18px; }
+  .video-card { width: 90vw; max-width: 350px; }
+  #channel-info { flex-direction: column; text-align: center; gap: 18px; }
+}
+
+@media (max-width: 700px) {
+  #videos { gap: 10px; }
+  .video-card { width: 98vw; max-width: 99vw; }
+  #channel-info { padding: 18px 6px; flex-direction: column; gap: 10px; }
+  #channel-info img { width: 70px; height: 70px; }
+  #channel-info .details h2 { font-size: 1.2em; }
+  #channel-info .details p { font-size: 1em; }
+  .video-card h3 { font-size: 1em; min-height: 36px; }
+  .video-card p { font-size: 0.95em; min-height: 30px; }
+  #subscribeModal .modal-content { padding: 18px 6px; }
+}
+
+@media (max-width: 500px) {
+  header { font-size: 1em; padding: 18px 0 12px 0; }
+  #channel-info { padding: 10px 2vw; }
+  .video-card { width: 99vw; max-width: 99vw; padding: 10px 2vw; }
+  #videos { gap: 5px; }
+  #subscribeModal .modal-content { padding: 10px 2vw; }
+  #continueBtn, #closeModalBtn { font-size: 0.95em; }
+}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>ROYALE BROTHERS VLOG</h1>
+  </header>
+  <div id="channel-info"></div>
+  <div id="videos"></div>
+  <div id="subscribeModal">
+    <div class="modal-content">
+      <h2>Subscribe to this Channel!</h2>
+      <p>Please subscribe to our YouTube channel to support us.</p>
+      <button id="continueBtn">Continue to YouTube</button>
+      <br>
+      <button id="closeModalBtn">Cancel</button>
+    </div>
+  </div>
+  <div style="text-align:center; margin-bottom:40px;">
+    <button id="loadMoreBtn" style="display:none;">
+      Load More Videos
+    </button>
+  </div>
+  <footer>
+    &copy; <span id="year"></span> WEBSITE CREATED BY ROSHINTH SOJAN.
+  </footer>
+<script>
+  const apiKey = 'AIzaSyBMonUoRJPD5v46weJLW2sEH_27E0tRb50';
+  const channelId = 'UC3tYlGFdCd2lTjpGPSD0r8Q';
+
+  let nextPageToken = '';
+  let loading = false;
+
+  // Fetch channel info
+  fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.items && data.items.length > 0) {
+        const channel = data.items[0];
+        document.getElementById('channel-info').innerHTML = `
+          <img src="${channel.snippet.thumbnails.default.url}" alt="Channel Logo">
+          <div class="details">
+            <h2>${channel.snippet.title}</h2>
+            <p>${channel.snippet.description || ''}</p>
+            <p><strong>Subscribers:</strong> ${Number(channel.statistics.subscriberCount).toLocaleString()}</p>
+            <a href="#" id="visitYoutubeBtn">Visit on YouTube</a>
+          </div>
+        `;
+        // Add event listener for the Visit on YouTube button
+        document.getElementById('visitYoutubeBtn').addEventListener('click', function(e) {
+          e.preventDefault();
+          document.getElementById('subscribeModal').style.display = 'flex';
+        });
+      }
+    });
+
+  async function fetchVideos(pageToken = '') {
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${apiKey}&channelId=${channelId}&part=snippet,id&order=date&maxResults=12&type=video${pageToken ? `&pageToken=${pageToken}` : ''}`;
+    const response = await fetch(url);
+    return await response.json();
+  }
+
+  async function displayVideos() {
+    if (loading) return;
+    loading = true;
+    const videosDiv = document.getElementById('videos');
+    const data = await fetchVideos(nextPageToken);
+    let count = 0;
+    data.items.forEach(item => {
+      if (item.id.kind === "youtube#video") {
+        videosDiv.innerHTML += `
+          <div class="video-card">
+            <iframe width="320" height="180" src="https://www.youtube.com/embed/${item.id.videoId}" frameborder="0" allowfullscreen></iframe>
+            <h3>${item.snippet.title}</h3>
+            <p>${item.snippet.description.substring(0, 80)}${item.snippet.description.length > 80 ? '...' : ''}</p>
+            <a href="https://www.youtube.com/watch?v=${item.id.videoId}" target="_blank">Watch on YouTube</a>
+          </div>
+        `;
+        count++;
+      }
+    });
+    nextPageToken = data.nextPageToken || '';
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    if (nextPageToken) {
+      loadMoreBtn.style.display = 'inline-block';
+    } else {
+      loadMoreBtn.style.display = 'none';
+    }
+    if (count === 0 && !nextPageToken) {
+      videosDiv.innerHTML = "<p>No videos found.</p>";
+    }
+    loading = false;
+  }
+
+  document.getElementById('loadMoreBtn').onclick = displayVideos;
+
+  // Modal logic
+  document.getElementById('closeModalBtn').onclick = function() {
+    document.getElementById('subscribeModal').style.display = 'none';
+  };
+  document.getElementById('continueBtn').onclick = function() {
+    window.open(`https://www.youtube.com/channel/${channelId}`, '_blank');
+    document.getElementById('subscribeModal').style.display = 'none';
+  };
+
+  // Initial load
+  displayVideos();
+
+  // Set current year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
