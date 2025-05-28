@@ -248,7 +248,6 @@
     }
     /* Responsive */
    /* Add this at the end of your <style> block for improved responsiveness */
-// ...existing code...
 
 @media (max-width: 1100px) {
   #videos { gap: 18px; }
@@ -280,8 +279,12 @@
 </head>
 <body>
   <header>
-    <h1>ROYALE BROTHERS VLOG</h1>
-  </header>
+  <h1>ROYALE BROTHERS VLOG</h1>
+  <div id="header-stats" style="margin-top:10px; font-size:1.15em;">
+    <span id="header-subscribers"></span> &nbsp;|&nbsp; 
+    <span id="header-views"></span>
+  </div>
+</header>
   <div id="channel-info"></div>
   <div id="videos"></div>
   <div id="subscribeModal">
@@ -308,18 +311,23 @@
   let nextPageToken = '';
   let loading = false;
 
-  // Fetch channel info
+  // Fetch channel info and update header stats
   fetch(`https://www.googleapis.com/youtube/v3/channels?part=snippet,statistics&id=${channelId}&key=${apiKey}`)
     .then(response => response.json())
     .then(data => {
       if (data.items && data.items.length > 0) {
         const channel = data.items[0];
+        // Update header stats
+        document.getElementById('header-subscribers').textContent =
+          `Subscribers: ${Number(channel.statistics.subscriberCount).toLocaleString()}`;
+        document.getElementById('header-views').textContent =
+          `Total Views: ${Number(channel.statistics.viewCount).toLocaleString()}`;
+        // Channel info section
         document.getElementById('channel-info').innerHTML = `
           <img src="${channel.snippet.thumbnails.default.url}" alt="Channel Logo">
           <div class="details">
             <h2>${channel.snippet.title}</h2>
             <p>${channel.snippet.description || ''}</p>
-            <p><strong>Subscribers:</strong> ${Number(channel.statistics.subscriberCount).toLocaleString()}</p>
             <a href="#" id="visitYoutubeBtn">Visit on YouTube</a>
           </div>
         `;
